@@ -39,9 +39,44 @@
 </footer>
 
 <script type="module">
-   // (paste the full login script here)
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBsmwMzGeL6ZQUKom6LYX33JQYXcOV3MO4",
+    authDomain: "bigdream-rr.firebaseapp.com",
+    projectId: "bigdream-rr",
+    storageBucket: "bigdream-rr.firebasestorage.app",
+    messagingSenderId: "577303163510",
+    appId: "1:577303163510:web:414e36ca824f0cbd1ca557",
+    measurementId: "G-QL3CVWN3R8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // 🔐 YOUR ADMIN EMAIL
+  const adminEmails = ["bigdreamadmin@gmail.com"];
+
+  document.getElementById("login-btn").addEventListener("click", function () {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-pass").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        if (adminEmails.includes(email)) {
+          window.location.href = "admin.html";   // Admin goes here
+        } else {
+          window.location.href = "dashboard.html"; // Normal user here
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  });
 </script>
 
 </body>
 </html>
+
 
