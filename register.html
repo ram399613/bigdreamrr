@@ -49,10 +49,38 @@
 </footer>
 
 <script>
-function toggleMode() {
-document.body.classList.toggle("light-mode");
-}
+mport { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBsmwMzGeL6ZQUKom6LYX33JQYXcOV3MO4",
+    authDomain: "bigdream-rr.firebaseapp.com",
+    projectId: "bigdream-rr",
+    storageBucket: "bigdream-rr.firebasestorage.app",
+    messagingSenderId: "577303163510",
+    appId: "1:577303163510:web:414e36ca824f0cbd1ca557",
+    measurementId: "G-QL3CVWN3R8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  document.getElementById("reg-btn").addEventListener("click", function(){
+    const email = document.getElementById("reg-email").value;
+    const password = document.getElementById("reg-pass").value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Account Created Successfully!");
+        window.location.href = "login.html";
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+});
+
 </script>
 
 </body>
 </html>
+
