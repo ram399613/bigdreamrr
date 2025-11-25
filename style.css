@@ -1,0 +1,270 @@
+/* ===== Global Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Background & Body ===== */
+body {
+    background: url("bigdream-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #e5e7eb;
+    position: relative;
+    animation: bgFade 1.4s ease-in-out;
+}
+
+/* Dark overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.68);
+    z-index: -1;
+}
+
+/* Spotlight Glow */
+body::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1200px;
+    height: 1200px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.9) 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ===== Header ===== */
+header {
+    background: rgba(2, 6, 23, 0.85);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: white;
+}
+
+nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin-left: 12px;
+    font-weight: 500;
+}
+
+nav a:hover, .active {
+    color: #38bdf8;
+}
+
+/* ===== Mode Toggle Button ===== */
+.mode-toggle {
+    background: #38bdf8;
+    border: none;
+    border-radius: 50%;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero span {
+    color: #38bdf8;
+}
+
+/* Typewriter Animation for BIG DREAM */
+.type-title span {
+    display: inline-block;
+    border-right: 3px solid #38bdf8;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(20), blink .7s infinite;
+}
+
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* ===== Content Wrapper ===== */
+.content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+/* ===== Aims List ===== */
+.aims ul {
+    margin-top: 15px;
+    line-height: 1.8;
+    font-size: 18px;
+}
+.aims ul li {
+    padding: 8px;
+}
+
+/* ===== Forms ===== */
+.goal-form {
+    background: rgba(2, 6, 23, 0.85);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+}
+
+.goal-form input,
+.goal-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: rgba(15, 23, 42, 0.85);
+    color: white;
+}
+
+.goal-form textarea { height: 90px; }
+
+/* ===== 3D Premium Buttons ===== */
+.goal-form button,
+.mode-toggle {
+    position: relative;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0 4px 0 #0a0e14, 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.goal-form button {
+    background: #38bdf8;
+    border-radius: 6px;
+    padding: 10px 15px;
+}
+
+.goal-form button:hover,
+.mode-toggle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 #0a0e14, 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.goal-form button:active,
+.mode-toggle:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #0a0e14, 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.goal-form button:hover {
+    background: linear-gradient(90deg, #38bdf8, #5cd0ff);
+}
+.mode-toggle:hover {
+    background: linear-gradient(90deg, #38bdf8, #009dff);
+}
+
+/* ===== Quote Slider ===== */
+.quotes-slider {
+    text-align: center;
+    margin-top: 35px;
+    padding: 20px;
+    background: rgba(2, 6, 23, 0.85);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+}
+.quotes-slider h3 { color: #38bdf8; margin-bottom: 10px; }
+#quote-box { font-style: italic; color: #fbbf24; }
+
+/* ===== Login / Register ===== */
+.login-form button { width: 100%; }
+.signup-text { text-align: center; font-size: 14px; margin-top: 8px; }
+.signup-text a { color: #38bdf8; text-decoration: none; }
+.signup-text a:hover { text-decoration: underline; }
+
+/* ===== Note ===== */
+.note { margin-top: 10px; font-size: 13px; color: #fbbf24; }
+
+/* ===== Footer ===== */
+footer {
+    background: rgba(2, 6, 23, 0.85);
+    text-align: center;
+    padding: 12px;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #9ca3af;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: fixed;
+    bottom: 0;
+    width: 100;
+    
+}
+
+/* ===== Circular Neon Social Icons ===== */
+.social-circle {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.social-circle a {
+    width: 38px;
+    height: 38px;
+    background: rgba(56, 189, 248, 0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(56, 189, 248, 0.6);
+    transition: 0.35s ease-in-out;
+    cursor: pointer;
+    backdrop-filter: blur(3px);
+}
+
+.social-circle a img {
+    width: 18px;
+    filter: invert(70%);
+    opacity: 0.8;
+    transition: 0.35s ease-in-out;
+}
+
+.social-circle a:hover {
+    transform: translateY(-5px) scale(1.12);
+    background: rgba(56, 189, 248, 0.45);
+    box-shadow: 0 0 14px #38bdf8;
+}
+
+.social-circle a:hover img {
+    filter: invert(100%);
+    opacity: 1;
+}
+
+/* ===== Light Mode ===== */
+.light-mode { background: #f1f5f9; color: #0f172a; }
+.light-mode header,
+.light-mode footer,
+.light-mode .goal-form,
+.light-mode .quotes-slider {
+    background: #d1e7ff; color: #0f172a; border-color: #93c5fd;
+}
+.light-mode input,
+.light-mode textarea { background: white; color: #0f172a; }
+
+/* ===== Fade Animation ===== */
+@keyframes bgFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== Hover Animation ===== */
+button, nav a { transition: 0.3s ease; }
+button:hover, nav a:hover { transform: translateY(-2px); }
+.aims ul li:hover, .goal-form:hover { transform: scale(1.02); transition: 0.3s; }

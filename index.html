@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BIG DREAM - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1 class="logo">BIG DREAM</h1>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="aims.html">Our Aims</a>
+        <a href="goals.html">Goal Planner</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <button class="mode-toggle" onclick="toggleMode()">🌙</button>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Welcome to <span>BIG DREAM</span></h2>
+    <p>Dream big, plan smart, and work hard every day.</p>
+</section>
+
+<section class="quotes-slider">
+    <h3>Daily Motivation</h3>
+    <p id="quote-box">"Big dreams start with small steps."</p>
+</section>
+
+<footer>
+    BIG DREAM &copy; 2025 | Dream Big, Act Now.
+</footer>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("light-mode");
+}
+const quotes = [
+"Dream big, start small, act now.",
+"Your future depends on what you do today.",
+"Success comes to those who never quit.",
+"Big dreams require big effort.",
+"Believe you can and you're halfway there.",
+"Do something today that your future self will thank you for."
+];
+let quoteIndex = 0;
+setInterval(() => {
+quoteIndex = (quoteIndex + 1) % quotes.length;
+document.getElementById("quote-box").textContent = quotes[quoteIndex];
+}, 3000);
+</script>
+
+</body>
+</html>

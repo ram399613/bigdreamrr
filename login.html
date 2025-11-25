@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - BIG DREAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1 class="logo">BIG DREAM</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aims.html">Our Aims</a>
+        <a href="goals.html">Goal Planner</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active">Login</a>
+        <button class="mode-toggle" onclick="toggleMode()">🌙</button>
+    </nav>
+</header>
+
+<section class="content">
+    <h2>User Login</h2>
+
+    <form class="goal-form login-form">
+        <label>Username or Email</label>
+        <input type="text" placeholder="Enter username or email">
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter password">
+
+        <button type="button">Login (Demo Only)</button>
+        <p class="signup-text">Don't have an account? <a href="register.html">Register</a></p>
+    </form>
+</section>
+
+<footer>
+    BIG DREAM &copy; 2025 | Dream Big, Act Now.
+</footer>
+
+<script>
+function toggleMode() {
+document.body.classList.toggle("light-mode");
+}
+</script>
+
+</body>
+</html>
