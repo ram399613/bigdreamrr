@@ -22,18 +22,22 @@
 <section class="content">
     <h2>Contact Us</h2>
 
-    <form class="goal-form">
-        <label>Your Name</label>
-        <input type="text" placeholder="Enter name">
+<form class="goal-form" method="POST">
+    <label>Your Name</label>
+    <input type="text" name="name" placeholder="Enter name" required>
 
-        <label>Email</label>
-        <input type="email" placeholder="Enter email">
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Enter email" required>
 
-        <label>Your Message</label>
-        <textarea placeholder="Write message..."></textarea>
+    <label>Your Message</label>
+    <textarea name="message" placeholder="Write message..." required></textarea>
 
-        <button type="button">Send (Demo Only)</button>
-    </form>
+    <button type="submit">Send Message</button>
+</form>
+
+
+
+
 </section>
 
 <footer>
