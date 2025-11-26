@@ -1,43 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>BIG DREAM - Our Aims</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Big Dream Aims - Continuous Effect</title>
+
+<style>
+
+    body {
+        background: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        padding: 40px;
+    }
+
+    h2 {
+        font-size: 40px;
+        color: #00eaff;
+        text-shadow: 0 0 15px #00eaff;
+        margin-bottom: 20px;
+    }
+
+    details {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(0,234,255,0.4);
+        padding: 15px 20px;
+        margin: 18px 0;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: 0.3s;
+        backdrop-filter: blur(4px);
+    }
+
+    details:hover {
+        box-shadow: 0 0 20px rgba(0,234,255,0.4);
+    }
+
+    summary {
+        font-size: 22px;
+        font-weight: bold;
+        list-style: none;
+    }
+
+    summary::after {
+        content: '+';
+        float: right;
+        font-size: 25px;
+        color: #00eaff;
+        transition: 0.3s;
+    }
+
+    details[open] summary::after {
+        content: '−';
+        transform: rotate(180deg);
+        color: #ffdf6b;
+    }
+
+    /* ♾️ Continuous Glow Typing Style */
+    details p {
+        margin-top: 10px;
+        font-size: 17px;
+        color: #e8feff;
+        line-height: 1.6rem;
+        animation: glowType 3s ease-in-out infinite;
+        text-shadow: 0 0 8px rgba(0,255,255,0.6);
+    }
+
+    /* ✨ Infinite Animation Keyframes */
+    @keyframes glowType {
+        0%   { opacity: 0.3; letter-spacing: 4px; text-shadow: 0 0 4px #00eaff; }
+        50%  { opacity: 1; letter-spacing: 1px; text-shadow: 0 0 12px #00eaff; }
+        100% { opacity: 0.3; letter-spacing: 4px; text-shadow: 0 0 4px #00eaff; }
+    }
+
+</style>
 </head>
 <body>
 
-<header>
-    <h1 class="logo">BIG DREAM</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="aims.html" class="active">Our Aims</a>
-        <a href="goals.html">Goal Planner</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html">Login</a>
-        <button class="mode-toggle" onclick="toggleMode()">🌙</button>
-    </nav>
-</header>
+<h2>Our Four Main Aims</h2>
 
-<section class="content aims">
-    <h2>Our Four Main Aims</h2>
-    <ul>
-        <li>Inspire people to dream big in life.</li>
-        <li>Help people set clear goals and action plans.</li>
-        <li>Provide daily motivation to stay consistent.</li>
-        <li>Share guidance and tools for personal growth.</li>
-    </ul>
-</section>
+<details>
+    <summary>Inspire people to dream big in life.</summary>
+    <p>Dreaming big is the spark that ignites success. It transforms ordinary thinking into extraordinary possibilities. We encourage people to imagine beyond limitations, shaping a powerful life vision that fuels motivation, direction, and belief in one's own abilities.</p>
+</details>
 
-<footer>
-    BIG DREAM &copy; 2025 | Dream Big, Act Now.
-</footer>
+<details>
+    <summary>Help people set clear goals and action plans.</summary>
+    <p>A dream without structure remains an idea. We convert aspirations into achievable goals using proven planning strategies. By organizing steps, prioritizing actions, and tracking progress, we make success measurable, predictable, and attainable for everyone.</p>
+</details>
 
-<script>
-function toggleMode() {
-document.body.classList.toggle("light-mode");
-}
-</script>
+<details>
+    <summary>Provide daily motivation to stay consistent.</summary>
+    <p>True achievement comes from steady effort, not sudden bursts. We cultivate discipline and consistency through motivational reminders, success tracking, and inspiring content, turning daily habits into unstoppable progress toward long-term goals.</p>
+</details>
+
+<details>
+    <summary>Share guidance and tools for personal growth.</summary>
+    <p>Personal growth strengthens the mind behind the dream. We provide knowledge, resources, and skill-building tools that improve confidence, focus, patience, and decision-making. With inner strength, any dream becomes achievable.</p>
+</details>
 
 </body>
 </html>
