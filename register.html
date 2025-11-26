@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   
+
 
 <header>
     <h1 class="logo">BIG DREAM</h1>
@@ -23,25 +25,26 @@
 <section class="content">
     <h2>Create an Account</h2>
 
-    <form class="goal-form login-form">
-        <label>Full Name</label>
-        <input type="text" placeholder="Enter full name">
+<form class="goal-form login-form" method="POST">
+    <label>Full Name</label>
+    <input type="text" name="name" placeholder="Enter full name" required>
 
-        <label>Email</label>
-        <input type="email" placeholder="Enter email">
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Enter email" required>
 
-        <label>Username</label>
-        <input type="text" placeholder="Choose a username">
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Choose a username" required>
 
-        <label>Password</label>
-        <input type="password" placeholder="Create password">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Create password" required>
 
-        <label>Confirm Password</label>
-        <input type="password" placeholder="Confirm password">
+    <label>Confirm Password</label>
+    <input type="password" name="confirm" placeholder="Confirm password" required>
 
-        <button type="button">Register (Demo Only)</button>
-        <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
-    </form>
+    <button type="submit">Register</button>
+    <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
+</form>
+
 </section>
 
 <footer>
@@ -49,38 +52,10 @@
 </footer>
 
 <script>
-mport { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBsmwMzGeL6ZQUKom6LYX33JQYXcOV3MO4",
-    authDomain: "bigdream-rr.firebaseapp.com",
-    projectId: "bigdream-rr",
-    storageBucket: "bigdream-rr.firebasestorage.app",
-    messagingSenderId: "577303163510",
-    appId: "1:577303163510:web:414e36ca824f0cbd1ca557",
-    measurementId: "G-QL3CVWN3R8"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  document.getElementById("reg-btn").addEventListener("click", function(){
-    const email = document.getElementById("reg-email").value;
-    const password = document.getElementById("reg-pass").value;
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        alert("Account Created Successfully!");
-        window.location.href = "login.html";
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-});
-
+function toggleMode() {
+document.body.classList.toggle("light-mode");
+}
 </script>
 
 </body>
 </html>
-
