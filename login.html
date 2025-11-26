@@ -1,82 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login - BIG DREAM</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<title>Luxury Login - Big Dream</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 0;
+        
+        background: url("bigdream-bg.jpg") no-repeat center center fixed;
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: Poppins, Arial, sans-serif;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-box {
+        width: 450px;
+        padding: 30px 40px;
+        border-radius: 15px;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(0, 225, 255, 0.3);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(0,230,255,0.15);
+        animation: glowBox 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes glowBox {
+        0% { box-shadow: 0 0 20px rgba(0,230,255,0.2); }
+        100% { box-shadow: 0 0 35px rgba(0,230,255,0.5); }
+    }
+
+    .login-title {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #00eaff;
+        text-shadow: 0 0 10px #00eaff;
+        font-weight: 600;
+    }
+
+    label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #00eaff;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 12px 14px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(0,230,255,0.4);
+        border-radius: 6px;
+        color: #e5ffff;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .input-field:focus {
+        border-color: #ffdf6b;
+        box-shadow: 0 0 15px #ffdf6b;
+    }
+
+    .show-pass {
+        position: absolute;
+        right: 20px;
+        margin-top: -33px;
+        cursor: pointer;
+        font-size: 15px;
+        color: #00eaff;
+    }
+
+    .remember-box {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 15px 0;
+        font-size: 14px;
+    }
+
+    .remember-box a {
+        color: #ffdf6b;
+        text-decoration: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(45deg, #00eaff, #006b84);
+        cursor: pointer;
+        color: #000;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: linear-gradient(45deg, #ffdf6b, #c49b05);
+        box-shadow: 0 0 15px #ffdf6b;
+        transform: scale(1.04);
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .register-link a {
+        color: #00eaff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+</style>
 </head>
+
 <body>
 
-<header>
-    <h1 class="logo">BIG DREAM</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="aims.html">Our Aims</a>
-        <a href="goals.html">Goal Planner</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html" class="active">Login</a>
-        <button class="mode-toggle" onclick="toggleMode()">🌙</button>
-    </nav>
-</header>
+<div class="login-box">
+    <div class="login-title">User Login</div>
 
-<section class="content">
-    <h2>User Login</h2>
+    <label>Username or Email</label>
+    <input type="text" class="input-field" placeholder="Enter username or email">
 
-    <form class="goal-form login-form">
-        <label>Username or Email</label>
-        <input type="text" placeholder="Enter username or email">
+    <label>Password</label>
+    <input type="password" id="password" class="input-field" placeholder="Enter password">
+    <span class="show-pass" onclick="showPass()">Show</span>
 
-        <label>Password</label>
-        <input type="password" placeholder="Enter password">
+    <div class="remember-box">
+        <label><input type="checkbox"> Remember Me</label>
+        <a href="#">Forgot Password?</a>
+    </div>
 
-        <button type="button">Login (Demo Only)</button>
-        <p class="signup-text">Don't have an account? <a href="register.html">Register</a></p>
-    </form>
-</section>
+    <button type="submit">Login</button>
 
-<footer>
-    BIG DREAM &copy; 2025 | Dream Big, Act Now.
-</footer>
 
-<script type="module">
- import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBsmwMzGeL6ZQUKom6LYX33JQYXcOV3MO4",
-    authDomain: "bigdream-rr.firebaseapp.com",
-    projectId: "bigdream-rr",
-    storageBucket: "bigdream-rr.firebasestorage.app",
-    messagingSenderId: "577303163510",
-    appId: "1:577303163510:web:414e36ca824f0cbd1ca557",
-    measurementId: "G-QL3CVWN3R8"
-  };
+    <div class="register-link">
+        Don't have an account? <a href="#">Register</a>
+    </div>
+</div>
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // 🔐 YOUR ADMIN EMAIL
-  const adminEmails = ["bigdreamadmin@gmail.com"];
-
-  document.getElementById("login-btn").addEventListener("click", function () {
-    const email = document.getElementById("login-email").value;
-    const password = document.getElementById("login-pass").value;
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        if (adminEmails.includes(email)) {
-          window.location.href = "admin.html";   // Admin goes here
-        } else {
-          window.location.href = "dashboard.html"; // Normal user here
-        }
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  });
+<script>
+    function showPass() {
+        const pass = document.getElementById("password");
+        pass.type = pass.type === "password" ? "text" : "password";
+    }
 </script>
+
+
+
+
 
 </body>
 </html>
-
-
