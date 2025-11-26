@@ -1,57 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Goal Planner - BIG DREAM</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Goal Planner - Big Dream</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+    body {
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background: url("/mnt/data/WhatsApp Image 2025-11-26 at 1.38.24 AM.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    backdrop-filter: blur(0px);
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background: url("/mnt/data/WhatsApp Image 2025-11-26 at 1.38.24 AM.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    backdrop-filter: blur(0px);
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background: url("bigdream-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    backdrop-filter: blur(0px);
+}
+
+}
+
+
+    h1 {
+        font-size: 38px;
+        margin-bottom: 25px;
+        text-shadow: 0 0 10px #00eaff;
+        animation: glowTitle 2.5s infinite ease-in-out;
+    }
+
+    @keyframes glowTitle {
+        0% { text-shadow: 0 0 3px #00eaff; }
+        50% { text-shadow: 0 0 15px #00eaff; }
+        100% { text-shadow: 0 0 3px #00eaff; }
+    }
+
+    .goal-container {
+        width: 75%;
+        margin: auto;
+        background: rgba(0,0,0,0.6);
+        border: 1px solid rgba(0,234,255,0.3);
+        padding: 25px 35px;
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(0,234,255,0.15);
+        backdrop-filter: blur(6px);
+        animation: containerGlow 3s infinite linear alternate;
+    }
+
+    @keyframes containerGlow {
+        0% { box-shadow: 0 0 10px rgba(0,234,255,0.2); }
+        100% { box-shadow: 0 0 20px rgba(0,234,255,0.5); }
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 5px;
+        color: #00eaff;
+        text-shadow: 0 0 10px #00eaff;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 18px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255,255,255,0.08);
+        color: #c8faff;
+        font-size: 16px;
+        border: 1px solid rgba(0,234,255,0.4);
+        transition: 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #ffdf6b;
+        box-shadow: 0 0 10px #ffdf6b;
+    }
+
+    button {
+        padding: 12px 20px;
+        background: linear-gradient(45deg, #00eaff, #005d73);
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        cursor: pointer;
+        color: #000;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: linear-gradient(45deg, #ffdf6b, #c49b05);
+        color: #000;
+        box-shadow: 0 0 15px #ffdf6b;
+        transform: scale(1.05);
+    }
+
+</style>
 </head>
 <body>
 
-<header>
-    <h1 class="logo">BIG DREAM</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="aims.html">Our Aims</a>
-        <a href="goals.html" class="active">Goal Planner</a>
-        <a href="contact.html">Contact</a>
-        <a href="login.html">Login</a>
-        <button class="mode-toggle" onclick="toggleMode()">🌙</button>
-    </nav>
-</header>
+<h1>Create Your Goal Plan</h1>
 
-<section class="content">
-    <h2>Create Your Goal Plan</h2>
+<div class="goal-container">
 
-    <form class="goal-form">
-        <label>Your Name</label>
-        <input type="text" placeholder="Enter your name">
+    <label>Your Name</label>
+    <input type="text" placeholder="Enter your name">
 
-        <label>Your Big Dream</label>
-        <textarea placeholder="Write your dream..."></textarea>
+    <label>Your Big Dream</label>
+    <textarea rows="3" placeholder="Write your big dream..."></textarea>
 
-        <label>First Step You Will Take</label>
-        <textarea placeholder="Write your first step..."></textarea>
+    <label>First Step You Will Take</label>
+    <textarea rows="3" placeholder="What will be your first step?"></textarea>
 
-        <label>Timeline</label>
-        <input type="text" placeholder="e.g. 6 months, 1 year">
+    <label>Why is this goal important?</label>
+    <textarea rows="3" placeholder="What is the strong reason behind your goal?"></textarea>
 
-        <button type="button" onclick="downloadPDF()">Download as PDF</button>
-    </form>
-    <p class="note">* This is a static demo. Data will not be saved.</p>
-</section>
+    <label>What Obstacles Might You Face?</label>
+    <textarea rows="3" placeholder="Possible challenges you might face..."></textarea>
 
-<footer>
-    BIG DREAM &copy; 2025 | Dream Big, Act Now.
-</footer>
+    <label>Resources You Need</label>
+    <input type="text" placeholder="Books, People, Courses, Tools...">
 
-<script>
-function toggleMode() {
-document.body.classList.toggle("light-mode");
-}
-function downloadPDF() {
-alert("PDF Download feature will work when backend is added!");
-}
-</script>
+    <label>Target Time / Deadline</label>
+    <input type="text" placeholder="e.g. 6 months, 1 year, specific date">
+
+    <label>Progress Check Frequency</label>
+    <select>
+        <option>Daily</option>
+        <option>Weekly</option>
+        <option>Monthly</option>
+    </select>
+
+    <button>Download as PDF</button>
+
+</div>
 
 </body>
 </html>
