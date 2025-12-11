@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIG DREAM - Home</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== FIXED HERO SPACING + LAYOUT OPTIMIZATION ===== */
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("bigdream-bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      padding-top: 140px; /* pushes hero below header */
+      padding-bottom: 40px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 70px);
+      font-weight: 900;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #7dd3fc;
+      font-weight: 600;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ===== CONTENT CARDS ===== */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .content-card {
+      background: rgba(5, 12, 25, 0.82);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transition: 0.3s ease-out;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .content-card h3 {
+      margin: 0;
+      font-size: 22px;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content-card p {
+      margin-top: 8px;
+      color: #e2e8f0;
+      font-size: 15px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 120px;
+      }
+      .content-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER (Your global header stays unchanged) -->
+  <header class="header" role="banner">
+    <div class="brand">
+      <div class="logo">BIG DREAM</div>
+      <div class="tag">Dream Big • Act Now</div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="login.html">Login</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>BIG DREAM</h1>
+    <p>Dream Big. Act Now.</p>
+  </section>
+
+  <!-- PAGE CONTENT -->
+  <div class="content-wrapper">
+
+    <div class="content-card">
+      <h3>✨ About BIG DREAM</h3>
+      <p>BIG DREAM helps people set powerful goals, build daily habits, and stay motivated with a clear and structured path.</p>
+    </div>
+
+    <div class="content-card">
+      <h3>🚀 Our Approach</h3>
+      <p>Small consistent actions, clear vision, and disciplined execution — the formula for turning dreams into achievements.</p>
+    </div>
+
+    <div class="content-card">
+      <h3>🎯 Your Journey</h3>
+      <p>Use our tools like Goal Planner, Chatbot, and Music Focus mode to become your best version.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+
+      <div class="social-circle">
+        <a href="https://www.instagram.com/bigdream_entertainment/?hl=en" target="_blank">
+          <img src="insta logo.webp" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/search/results/all/?keywords=dream%20big%20digital" target="_blank">
+          <img src="link logo.avif" alt="LinkedIn">
+        </a>
+        <a href="https://www.youtube.com/@bigdream2893" target="_blank">
+          <img src="you logo.jpg" alt="YouTube">
+        </a>
+        <a href="https://github.com/ram399613/bigdreamrr" target="_blank">
+          <img src="git logo.webp" alt="GitHub">
+        </a>
+      </div>
+
+      <p class="footer-text">BIG DREAM © 2025 | Dream Big, Act Now.</p>
+
+      <div class="footer-links">
+        <a href="profile.html">Your Profile</a> •
+        <a href="aims.html">Aims</a> •
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>

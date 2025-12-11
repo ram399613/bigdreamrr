@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BIG DREAM - Home</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root { --accent: #38bdf8; }
+
+    html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: url('bigdream-bg.jpg') center/cover fixed no-repeat; color:#e8faff; }
+
+    /* PARTICLES CANVAS sits behind content */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: screen;
+    }
+
+    /* Header + animated RR logo */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 14px 20px; gap:12px;
+      z-index: 40;
+      background: linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,6,23,0.15));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px);
+    }
+    .brand { display:flex; align-items:center; gap:12px; position:relative; }
+
+    /* GREETING BADGE now inside header, to the left of brand */
+    .greet-badge {
+      position: absolute;
+      left: -110px; /* will be adjusted by header container — we'll reposition with JS to sit left inside header */
+      top: 6px;
+      transform: translateX(0);
+      background: linear-gradient(90deg, rgba(56,189,248,0.14), rgba(56,189,248,0.06));
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight:700;
+      font-size:14px;
+      z-index: 60;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      opacity:0;
+    }
+
+    /* We'll override position for screens */
+    @media (min-width:900px) {
+      .brand { padding-left:40px; } /* give space so greeting can sit visually at left inside header */
+      .greet-badge { left: 8px; top: 8px; opacity:1; }
+    }
+
+    .rr-logo {
+      width:56px; height:56px; border-radius:14px; overflow:hidden; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 2px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.6);
+      transform-origin:center;
+      animation: logo-breathe 3s ease-in-out infinite;
+    }
+    .rr-logo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .rr-initial { font-weight:900; font-size:20px; color:var(--accent); text-shadow:0 6px 24px rgba(56,189,248,0.08); }
+
+    @keyframes logo-breathe {
+      0% { transform: translateY(0) scale(1); box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+      50% { transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 42px rgba(0,0,0,0.6); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+    }
+
+    .brand .site-title { font-weight:900; font-size:18px; line-height:1; }
+    .brand .site-sub { font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px; }
+
+    .nav { display:flex; gap:14px; align-items:center; z-index:45; }
+    .nav a { color:rgba(255,255,255,0.86); text-decoration:none; padding:8px 10px; border-radius:8px; font-weight:600; font-size:14px; }
+    .nav a.active, .nav a:hover { background: rgba(56,189,248,0.08); color:var(--accent); }
+
+    .menu-btn { display:none; }
+
+    main { position:relative; z-index:10; padding: 120px 18px 80px; min-height:calc(100vh - 200px); }
+
+    .hero { text-align:center; max-width:1100px; margin:0 auto; padding:28px 20px; }
+    .hero h1 { font-size:54px; margin:0 0 8px 0; font-weight:900; text-shadow: 0 10px 40px rgba(0,0,0,0.6); color:#fff; }
+    .hero h1 span { color:var(--accent); }
+    .hero p { margin:6px 0 20px; color:rgba(255,255,255,0.88); font-size:18px; }
+
+    .grid { display:flex; gap:26px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
+    .card { width:300px; padding:22px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.04); box-shadow: 0 10px 30px rgba(0,0,0,0.6); backdrop-filter: blur(8px); transition:transform .28s ease, box-shadow .28s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow:0 22px 48px rgba(0,0,0,0.7); border-color:rgba(56,189,248,0.25); }
+    .h-accent { font-size:20px; color:var(--accent); font-weight:800; margin-bottom:8px; }
+    .lead { color:rgba(255,255,255,0.88); line-height:1.5; font-size:15px; }
+
+    .motivation-box { max-width:820px; margin:34px auto; padding:22px; border-radius:14px; background: rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.03); }
+    .primary { margin-top:12px; padding:12px 22px; border-radius:12px; background:var(--accent); border:none; font-weight:800; color:#021; cursor:pointer; box-shadow:0 10px 30px rgba(56,189,248,0.12); }
+
+    footer { padding:30px 18px; text-align:center; color:rgba(255,255,255,0.75); z-index:10; position:relative; }
+
+    /* SETTINGS */
+    .settings-btn { position: fixed; top: 95px; right: 25px; z-index:100; width:52px; height:52px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04); border-radius:12px; color:var(--accent); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    .settings-panel { position:fixed; top:0; right:-360px; width:340px; height:100%; background:rgba(3,7,18,0.9); color:#e8faff; padding:20px; z-index:120; transition:right .36s cubic-bezier(.22,.9,.3,1); border-left:1px solid rgba(255,255,255,0.03); }
+    .settings-panel.open { right:0; }
+    .settings-panel h2 { color:var(--accent); margin:0 0 12px; }
+    .settings-row { margin:12px 0; display:flex; align-items:center; gap:12px; }
+    .avatar-preview { width:64px; height:64px; border-radius:12px; overflow:hidden; border:2px solid rgba(255,255,255,0.04); background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--accent); }
+    .input-small { padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color:#e8faff; flex:1; }
+    .control-btn { padding:10px 12px; border-radius:10px; border:none; background:var(--accent); color:#021; font-weight:800; cursor:pointer; }
+
+    .color-options { display:flex; gap:10px; margin-top:8px; }
+    .color-dot { width:28px; height:28px; border-radius:8px; border:2px solid rgba(255,255,255,0.06); cursor:pointer; }
+
+    .sound-note { font-size:13px; color:rgba(255,255,255,0.6); }
+
+    /* responsive */
+    @media (max-width:900px) {
+      .nav { display:none; }
+      .menu-btn { display:block; background:transparent; color:var(--accent); border:none; font-size:22px; }
+      main { padding-top:140px; }
+      .settings-panel{ width:100%; right:-100%; }
+      .settings-panel.open{ right:0; }
+      .greet-badge { display:none; } /* hide greeting on small screens */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- particles canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <!-- GREETING INSIDE HEADER: positioned to the left, aligned with header content -->
+    <div id="greetingWrap" style="position:relative;">
+      <div id="greetingBadge" class="greet-badge" style="display:none;">Hi Ramu! 👋</div>
+    </div>
+
+    <div class="brand">
+      <div id="rrLogo" class="rr-logo" title="BIG DREAM">
+        <!-- dynamic: avatar image or initials -->
+        <div id="rrInner" class="rr-initial">RR</div>
+      </div>
+      <div>
+        <div class="site-title">BIG DREAM</div>
+        <div class="site-sub">Dream Big • Act Now</div>
+      </div>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Open menu">☰</button>
+  </header>
+
+  <!-- SETTINGS BUTTON -->
+  <button id="settingsBtn" class="settings-btn" title="Settings">⚙️</button>
+
+  <!-- SETTINGS PANEL -->
+  <aside id="settingsPanel" class="settings-panel" aria-hidden="true">
+    <h2>⚙️ Settings & Profile</h2>
+
+    <div class="settings-row">
+      <div id="avatarPreview" class="avatar-preview">RR</div>
+      <div style="flex:1;">
+        <input id="nameInput" class="input-small" placeholder="Your name (e.g. Ramu)" />
+        <div style="margin-top:8px;display:flex;gap:8px;">
+          <input id="avatarFile" type="file" accept="image/*" style="display:none;" />
+          <button id="uploadBtn" class="control-btn" style="padding:8px 10px;font-size:13px;">Upload Avatar</button>
+          <button id="removeAvatar" class="control-btn" style="background:rgba(255,255,255,0.06);color:var(--accent);">Remove</button>
+        </div>
+        <div style="margin-top:8px;" class="sound-note">Profile saves locally on this device.</div>
+      </div>
+    </div>
+
+    <hr style="border-color:rgba(255,255,255,0.03);">
+
+    <div class="settings-row">
+      <label style="width:100%;">Accent Color</label>
+      <div class="color-options" style="margin-left:auto;">
+        <div class="color-dot" data-color="#38bdf8" style="background:#38bdf8"></div>
+        <div class="color-dot" data-color="#ff4db8" style="background:#ff4db8"></div>
+        <div class="color-dot" data-color="#4dff8c" style="background:#4dff8c"></div>
+        <div class="color-dot" data-color="#b44dff" style="background:#b44dff"></div>
+      </div>
+    </div>
+
+    <div class="settings-row">
+      <label style="width:100%;">Sounds</label>
+      <div style="margin-left:auto;display:flex;gap:8px;">
+        <button id="soundTest" class="control-btn" style="padding:8px 10px;">Test Sound</button>
+        <button id="muteBtn" class="control-btn" style="background:rgba(255,255,255,0.06);color:var(--accent);">Mute</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;">
+      <button id="saveProfile" class="control-btn" style="width:100%;">Save Profile</button>
+    </div>
+
+    <div style="margin-top:10px;">
+      <button id="closeSettings" class="close-btn control-btn" style="width:100%; background:rgba(255,255,255,0.04); color:var(--accent);">Close</button>
+    </div>
+
+  </aside>
+
+  <main>
+    <section class="hero container">
+      <h1><span>Welcome</span> to BIG DREAM</h1>
+      <p>Dream big, set clear goals, and build unstoppable habits.</p>
+
+      <div class="grid" role="list">
+        <div class="card" role="listitem">
+          <div class="h-accent">🎯 Clear Goals</div>
+          <p class="lead">Create measurable objectives, break them into daily steps, and track progress.</p>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="h-accent">🧭 Guided Plans</div>
+          <p class="lead">Templates and planners to transform ideas into action.</p>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="h-accent">🤝 Community</div>
+          <p class="lead">Share wins, get guidance and stay motivated with peers.</p>
+        </div>
+      </div>
+
+      <div class="motivation-box" role="region" aria-live="polite">
+        <h3>Daily Motivation</h3>
+        <p id="quote" class="lead">"Big dreams start with small steps."</p>
+        <div style="margin-top:12px;"><button class="primary" onclick="location.href='goals.html'">Create a Goal Plan</button></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="icons" style="display:flex;gap:18px;justify-content:center;margin-bottom:8px;">
+      <a href="#"><img src="insta logo.webp" alt="Instagram" width="40"></a>
+      <a href="#"><img src="link logo.avif" alt="LinkedIn" width="40"></a>
+      <a href="#"><img src="you logo.jpg" alt="YouTube" width="40"></a>
+      <a href="https://github.com/ram399613/bigdreamrr" target="_blank"><img src="git logo.webp" alt="GitHub" width="40"></a>
+    </div>
+    <div style="font-size:14px;">BIG DREAM © 2025 | Dream Big, Act Now.</div>
+  </footer>
+
+<script>
+/* ----------------------------
+   Utility: Sound (WebAudio) 
+   ---------------------------- */
+const AudioEngine = (() => {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  let muted = localStorage.getItem('bd_muted') === 'true';
+
+  function beep(freq=440, type='sine', time=0.12, gain=0.08) {
+    if (muted) return;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    g.gain.value = gain;
+    o.connect(g); g.connect(ctx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + time);
+    setTimeout(()=> { try { o.stop(); } catch(e){} }, time*1000 + 20);
+  }
+
+  function click() { beep(880, 'sine', 0.08, 0.06); }
+  function open() { beep(620, 'sawtooth', 0.18, 0.07); }
+  function greetSound() { beep(520, 'triangle', 0.32, 0.08); }
+
+  function toggleMute() {
+    muted = !muted;
+    localStorage.setItem('bd_muted', muted);
+    return muted;
+  }
+
+  return { click, open, greetSound, toggleMute, isMuted:()=>muted };
+})();
+
+/* ----------------------------
+   Particles background (simple)
+   ---------------------------- */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w, h, particles=[];
+function resizeCanvas(){ w=canvas.width = innerWidth; h=canvas.height = innerHeight; }
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function rand(min,max){ return Math.random()*(max-min)+min; }
+
+function createParticles(){
+  particles = [];
+  const count = Math.max(30, Math.floor((w*h)/90000));
+  for(let i=0;i<count;i++){
+    particles.push({
+      x: rand(0,w), y: rand(0,h),
+      r: rand(0.6,2.6),
+      vx: rand(-0.25,0.25),
+      vy: rand(-0.12,0.12),
+      life: rand(80,400)
+    });
+  }
+}
+createParticles();
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{
+    p.x += p.vx; p.y += p.vy;
+    p.life -= 0.5;
+    if(p.x < -10) p.x = w+10;
+    if(p.x > w+10) p.x = -10;
+    if(p.y < -10) p.y = h+10;
+    if(p.y > h+10) p.y = -10;
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(56,189,248,0.07)';
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ----------------------------
+   Quotes rotation + greeting
+   ---------------------------- */
+const quotes = [
+  "Dream big, start small, act now.",
+  "Your future depends on what you do today.",
+  "Success comes to those who never quit.",
+  "Big dreams require consistent actions.",
+  "Believe you can — you're already halfway."
+];
+let qi = 0;
+const quoteEl = document.getElementById('quote');
+setInterval(()=> {
+  qi = (qi + 1) % quotes.length;
+  quoteEl.textContent = quotes[qi];
+}, 3500);
+
+/* ----------------------------
+   Settings & Profile logic
+   ---------------------------- */
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+const closeSettings = document.getElementById('closeSettings');
+const avatarPreview = document.getElementById('avatarPreview');
+const avatarFile = document.getElementById('avatarFile');
+const uploadBtn = document.getElementById('uploadBtn');
+const removeAvatar = document.getElementById('removeAvatar');
+const nameInput = document.getElementById('nameInput');
+const saveProfile = document.getElementById('saveProfile');
+const soundTest = document.getElementById('soundTest');
+const muteBtn = document.getElementById('muteBtn');
+const rrInner = document.getElementById('rrInner');
+const rrLogo = document.getElementById('rrLogo');
+const greetingBadge = document.getElementById('greetingBadge');
+
+settingsBtn.addEventListener('click', ()=>{
+  settingsPanel.classList.add('open');
+  settingsPanel.setAttribute('aria-hidden','false');
+  AudioEngine.open();
+});
+
+closeSettings.addEventListener('click', ()=> {
+  settingsPanel.classList.remove('open');
+  settingsPanel.setAttribute('aria-hidden','true');
+  AudioEngine.click();
+});
+
+uploadBtn.addEventListener('click', ()=> avatarFile.click());
+avatarFile.addEventListener('change', (e)=>{
+  const f = e.target.files && e.target.files[0];
+  if(!f) return;
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    const data = evt.target.result;
+    localStorage.setItem('bd_avatar', data);
+    setAvatarFromData(data);
+  };
+  reader.readAsDataURL(f);
+});
+
+removeAvatar.addEventListener('click', ()=> {
+  localStorage.removeItem('bd_avatar');
+  avatarPreview.textContent = 'RR';
+  rrInner.textContent = 'RR';
+  rrInner.style.background = 'transparent';
+  AudioEngine.click();
+});
+
+document.querySelectorAll('.color-dot').forEach(d=>{
+  d.addEventListener('click', () => {
+    const c = d.dataset.color || d.style.background;
+    document.documentElement.style.setProperty('--accent', c);
+    localStorage.setItem('bd_accent', c);
+    AudioEngine.click();
+  });
+});
+
+soundTest.addEventListener('click', ()=> { AudioEngine.click(); AudioEngine.greetSound(); });
+muteBtn.addEventListener('click', ()=>{
+  const muted = AudioEngine.toggleMute();
+  muteBtn.textContent = muted ? 'Unmute' : 'Mute';
+  AudioEngine.click();
+});
+
+/* save name & show greeting badge */
+function setAvatarFromData(dataUrl){
+  avatarPreview.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = dataUrl;
+  img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover';
+  avatarPreview.appendChild(img);
+
+  // set header logo
+  rrInner.innerHTML = '';
+  const himg = document.createElement('img');
+  himg.src = dataUrl;
+  rrInner.appendChild(himg);
+  rrInner.style.padding = '0';
+  rrInner.style.background = 'transparent';
+}
+
+function loadProfile(){
+  const name = localStorage.getItem('bd_name') || 'Ramu';
+  const avatar = localStorage.getItem('bd_avatar');
+  nameInput.value = name;
+  if(avatar){
+    setAvatarFromData(avatar);
+  } else {
+    avatarPreview.textContent = 'RR';
+    rrInner.textContent = 'RR';
+  }
+  // load accent
+  const ac = localStorage.getItem('bd_accent');
+  if(ac) document.documentElement.style.setProperty('--accent', ac);
+  // greet
+  greetUser(name);
+}
+saveProfile.addEventListener('click', ()=>{
+  const name = (nameInput.value || 'Ramu').trim();
+  localStorage.setItem('bd_name', name);
+  AudioEngine.greetSound();
+  greetUser(name, true);
+  settingsPanel.classList.remove('open');
+});
+
+/* RR animated logo show using uploaded or initials */
+function setHeaderAvatar() {
+  const a = localStorage.getItem('bd_avatar');
+  if(a){
+    rrInner.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = a;
+    img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover';
+    rrInner.appendChild(img);
+    rrInner.style.padding = '0';
+  } else {
+    const n = (localStorage.getItem('bd_name') || 'Ramu').trim();
+    rrInner.innerHTML = n ? (n.split(' ').map(s=>s[0]).slice(0,2).join('')) : 'RR';
+    rrInner.classList.add('rr-initial');
+  }
+}
+
+/* greeting badge + voice greeting */
+function greetUser(name='Ramu', showBadge=true){
+  // show badge
+  greetingBadge.textContent = `Hi ${name.split(' ')[0] || 'Ramu'}! 👋`;
+  greetingBadge.style.display = showBadge ? 'flex' : 'none';
+  // position badge nicely inside header (left side)
+  const hdr = document.querySelector('.header');
+  if (hdr) {
+    // place badge at 12px from left inside header
+    greetingBadge.style.position = 'absolute';
+    greetingBadge.style.left = '12px';
+    greetingBadge.style.top = '8px';
+  }
+  // animate in
+  greetingBadge.style.opacity = 0;
+  greetingBadge.style.transform = 'translateY(-6px)';
+  setTimeout(()=> { greetingBadge.style.transition = 'opacity .45s ease, transform .45s ease'; greetingBadge.style.opacity = 1; greetingBadge.style.transform = 'translateY(0)'; }, 60);
+
+  // voice
+  try {
+    const msg = `Hi ${name.split(' ')[0] || 'Ramu'}. Welcome back to Big Dream. Let's chase your goals!`;
+    const u = new SpeechSynthesisUtterance(msg);
+    u.rate = 1;
+    u.pitch = 1;
+    if(!AudioEngine.isMuted()) { speechSynthesis.speak(u); AudioEngine.greetSound(); }
+  } catch (e) { /* ignore */ }
+
+  // auto-hide the badge after a few seconds (but only on large screens)
+  if (window.innerWidth > 900) {
+    setTimeout(()=> {
+      greetingBadge.style.opacity = 0;
+      greetingBadge.style.transform = 'translateY(-12px)';
+      setTimeout(()=> { greetingBadge.style.display = 'none'; }, 500);
+    }, 4200);
+  }
+}
+
+/* initialize */
+loadProfile();
+setHeaderAvatar();
+
+/* allow closing panel with ESC */
+document.addEventListener('keydown', (e)=> {
+  if(e.key === 'Escape') { settingsPanel.classList.remove('open'); }
+});
+
+/* mobile menu toggle (keeps compatibility with site.js) */
+const menuBtn = document.getElementById('menuBtn');
+menuBtn && menuBtn.addEventListener('click', ()=> {
+  const nav = document.querySelector('.nav');
+  if(nav.style.display === 'flex') { nav.style.display=''; } else { nav.style.display='flex'; nav.style.flexDirection='column'; nav.style.position='fixed'; nav.style.right='16px'; nav.style.top='68px'; nav.style.background='rgba(2,6,23,0.9)'; nav.style.padding='12px'; nav.style.borderRadius='10px'; }
+});
+
+/* end of script */
+</script>
+
+<script src="site.js"></script>
+</body>
+</html>

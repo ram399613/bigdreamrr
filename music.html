@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Music • BIG DREAM</title>
+
+<style>
+  :root{
+    --bg-accent: rgba(3,7,18,0.6);
+    --glass: rgba(255,255,255,0.03);
+    --accent: #38bdf8;
+    --neon: rgba(56,189,248,0.18);
+    --card-radius: 18px;
+    --glass-border: rgba(255,255,255,0.04);
+    --muted: rgba(255,255,255,0.6);
+  }
+
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#e8faff;background:url('bigdream-bg.jpg') center/cover fixed no-repeat;}
+  .page { max-width:1200px;margin:120px auto 100px;padding:18px; position:relative; z-index:3; }
+
+  .title {
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .title h1 { margin:0; font-size:36px; font-weight:900; letter-spacing:0.2px; color:#fff; text-shadow: 0 6px 24px rgba(0,0,0,0.6); }
+  .title p { margin:10px 0 0 0; color:var(--muted); font-size:15px; }
+
+  /* Tabs */
+  .tabs { display:flex; gap:10px; justify-content:center; margin:22px 0 30px; flex-wrap:wrap; }
+  .tab { padding:10px 16px; background:transparent; border-radius:999px; font-weight:700; font-size:14px; color:var(--muted); border:1px solid rgba(255,255,255,0.03); cursor:pointer; transition:all .22s ease;}
+  .tab.active { color:#021; background:var(--accent); box-shadow: 0 6px 30px rgba(56,189,248,0.14), 0 0 12px rgba(56,189,248,0.06) inset; transform:translateY(-3px); }
+
+  /* grid of premium panels */
+  .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(360px,1fr)); gap:22px; align-items:start; }
+
+  /* ultra premium panel */
+  .panel {
+    position:relative;
+    padding:18px;
+    border-radius:var(--card-radius);
+    background: linear-gradient(180deg, rgba(10,14,20,0.62), rgba(10,14,20,0.46));
+    border:1px solid var(--glass-border);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.6);
+    overflow:hidden;
+    transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease;
+    min-height:220px;
+    backdrop-filter: blur(12px) saturate(1.1);
+  }
+  .panel:hover { transform: translateY(-10px); box-shadow: 0 24px 64px rgba(0,0,0,0.75); }
+
+  /* neon outline */
+  .panel::after{
+    content:"";
+    position:absolute; inset:-2px; pointer-events:none;
+    border-radius:inherit;
+    background: linear-gradient(90deg, transparent, rgba(56,189,248,0.18), transparent);
+    filter: blur(9px); opacity:0.95;
+    mix-blend-mode: screen;
+  }
+
+  .track-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:10px; }
+  .track-title { font-weight:900; color:var(--accent); font-size:18px; letter-spacing:0.2px; }
+  .track-sub { color:var(--muted); font-size:13px; margin-top:6px; width:65%; }
+
+  .wavewrap { width:100%; height:96px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06)); border:1px solid rgba(255,255,255,0.02); overflow:hidden; display:flex; align-items:center; justify-content:center; margin:8px 0 12px; }
+  .wave { width:100%; height:100%; display:block; }
+
+  /* controls row */
+  .controls { display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:6px; }
+  .left-controls { display:flex; gap:10px; align-items:center; }
+  .playbtn {
+    width:52px; height:44px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center;
+    background: linear-gradient(180deg, var(--accent), #22aee8); color:#021; font-weight:900; border:none; cursor:pointer; box-shadow: 0 8px 20px rgba(56,189,248,0.15);
+  }
+  .time { color:var(--muted); font-weight:700; font-size:13px; min-width:84px; text-align:center; }
+
+  .progress {
+    flex:1;
+    height:8px;
+    background: rgba(255,255,255,0.03);
+    border-radius:10px;
+    position:relative;
+    overflow:hidden;
+    margin:0 12px;
+  }
+  .progress .bar { position:absolute; left:0; top:0; bottom:0; width:0%; background: linear-gradient(90deg,var(--accent), #60e0ff); border-radius:10px; transition:width .12s linear; box-shadow: 0 6px 14px rgba(56,189,248,0.08) inset; }
+
+  .right-controls { display:flex; gap:8px; align-items:center; }
+  .icon-btn { width:38px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,0.03); background:rgba(255,255,255,0.02); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:var(--muted); }
+
+  .volwrap { width:120px; display:flex; gap:8px; align-items:center; }
+  .volbar { height:6px; background:rgba(255,255,255,0.03); border-radius:10px; position:relative; flex:1; }
+  .volbar .vb { position:absolute; left:0; top:0; bottom:0; width:50%; background:var(--accent); border-radius:10px; }
+
+  /* small equalizer dots */
+  .dots { margin-top:8px; display:flex; gap:6px; align-items:center; }
+  .dot { width:6px; height:6px; background:var(--accent); border-radius:999px; opacity:.12; box-shadow: 0 6px 18px rgba(56,189,248,0.06); animation: dotPulse 1.1s infinite ease-in-out; }
+  .dot:nth-child(2){ animation-delay:.12s; }
+  .dot:nth-child(3){ animation-delay:.22s; }
+  .dot:nth-child(4){ animation-delay:.32s; }
+  @keyframes dotPulse { 0%{ transform:scale(.8); opacity:.12 } 50%{ transform:scale(1.6); opacity:.95 } 100%{ transform:scale(.9); opacity:.12 } }
+
+  /* responsive */
+  @media (max-width:860px){
+    .grid{ grid-template-columns: 1fr; }
+    .track-sub { width:100%; }
+  }
+
+  /* small accessibility tweaks */
+  button:focus, .tab:focus { outline: 2px solid rgba(56,189,248,0.18); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="title">
+    <h1>🎧 Music & Focus Tracks</h1>
+    <p>Ultra-premium focus audio — neon glow player with live waveform. Use headphones for best results.</p>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <div class="tab active" data-filter="all" tabindex="0">All</div>
+    <div class="tab" data-filter="focus" tabindex="0">Focus</div>
+    <div class="tab" data-filter="productivity" tabindex="0">Productivity</div>
+    <div class="tab" data-filter="calm" tabindex="0">Calm</div>
+    <div class="tab" data-filter="loop" tabindex="0">Loop</div>
+  </div>
+
+  <div id="grid" class="grid">
+    <!-- Panel template: 4 tracks -->
+    <div class="panel" data-type="focus" data-src="music1.mp3" data-loop="false">
+      <div class="track-head">
+        <div>
+          <div class="track-title">Focus Ambient — Track 1</div>
+          <div class="track-sub">Gentle ambient textures — ideal for concentrated study sessions.</div>
+        </div>
+        <div style="text-align:right;color:var(--muted);font-weight:700;font-size:13px">7:20</div>
+      </div>
+
+      <div class="wavewrap">
+        <canvas class="wave" height="96"></canvas>
+      </div>
+
+      <div class="controls">
+        <div class="left-controls">
+          <button class="playbtn" title="Play/Pause" aria-label="Play">▶</button>
+          <div class="time">0:00</div>
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar"></div>
+          </div>
+        </div>
+
+        <div class="right-controls">
+          <div class="volwrap">
+            <div style="font-size:13px;color:var(--muted);">Vol</div>
+            <div class="volbar"><div class="vb" style="width:50%"></div></div>
+          </div>
+          <button class="icon-btn loop-btn" title="Loop" aria-pressed="false">↺</button>
+        </div>
+      </div>
+
+      <div class="dots" aria-hidden="true">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+
+    <div class="panel" data-type="productivity" data-src="music2.mp3" data-loop="false">
+      <div class="track-head">
+        <div>
+          <div class="track-title">Productivity Beats — Track 2</div>
+          <div class="track-sub">Upbeat, steady rhythm to keep energy up for coding or deep work.</div>
+        </div>
+        <div style="text-align:right;color:var(--muted);font-weight:700;font-size:13px">5:14</div>
+      </div>
+
+      <div class="wavewrap"><canvas class="wave" height="96"></canvas></div>
+
+      <div class="controls">
+        <div class="left-controls">
+          <button class="playbtn">▶</button>
+          <div class="time">0:00</div>
+          <div class="progress"><div class="bar"></div></div>
+        </div>
+        <div class="right-controls">
+          <div class="volwrap"><div style="font-size:13px;color:var(--muted);">Vol</div><div class="volbar"><div class="vb" style="width:50%"></div></div></div>
+          <button class="icon-btn loop-btn" title="Loop" aria-pressed="false">↺</button>
+        </div>
+      </div>
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+
+    <div class="panel" data-type="calm" data-src="music3.mp3" data-loop="false">
+      <div class="track-head">
+        <div>
+          <div class="track-title">Calm Piano — Track 3</div>
+          <div class="track-sub">Soft piano motifs for reflective study and creative writing.</div>
+        </div>
+        <div style="text-align:right;color:var(--muted);font-weight:700;font-size:13px">6:02</div>
+      </div>
+
+      <div class="wavewrap"><canvas class="wave" height="96"></canvas></div>
+
+      <div class="controls">
+        <div class="left-controls">
+          <button class="playbtn">▶</button>
+          <div class="time">0:00</div>
+          <div class="progress"><div class="bar"></div></div>
+        </div>
+        <div class="right-controls">
+          <div class="volwrap"><div style="font-size:13px;color:var(--muted);">Vol</div><div class="volbar"><div class="vb" style="width:50%"></div></div></div>
+          <button class="icon-btn loop-btn" title="Loop" aria-pressed="false">↺</button>
+        </div>
+      </div>
+
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+
+    <div class="panel" data-type="loop" data-src="music4.mp3" data-loop="true">
+      <div class="track-head">
+        <div>
+          <div class="track-title">Focus Loop — Track 4</div>
+          <div class="track-sub">Seamless loopable ambience for long sessions (loop enabled).</div>
+        </div>
+        <div style="text-align:right;color:var(--muted);font-weight:700;font-size:13px">2:40</div>
+      </div>
+
+      <div class="wavewrap"><canvas class="wave" height="96"></canvas></div>
+
+      <div class="controls">
+        <div class="left-controls">
+          <button class="playbtn">▶</button>
+          <div class="time">0:00</div>
+          <div class="progress"><div class="bar"></div></div>
+        </div>
+        <div class="right-controls">
+          <div class="volwrap"><div style="font-size:13px;color:var(--muted);">Vol</div><div class="volbar"><div class="vb" style="width:50%"></div></div></div>
+          <button class="icon-btn loop-btn" title="Loop" aria-pressed="true">↺</button>
+        </div>
+      </div>
+
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/*
+  Ultra Premium Music Player
+  - Custom player for each .panel
+  - Uses <audio> element created per panel and WebAudio Analyser for waveform
+  - Single-play behavior: only one track plays at a time
+  - Responsive and accessible
+*/
+
+(function(){
+  const panels = Array.from(document.querySelectorAll('.panel'));
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  let currentAudio = null;
+  let currentSource = null;
+
+  // helper time format
+  function fmtTime(s) {
+    s = Math.max(0, Math.floor(s));
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2,'0')}`;
+  }
+
+  // initialize WebAudio context
+  const AudioCtx = (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)() : null;
+
+  panels.forEach(panel => {
+    const src = panel.dataset.src;
+    const loopAttr = panel.dataset.loop === 'true';
+    const canvas = panel.querySelector('.wave');
+    const playBtn = panel.querySelector('.playbtn');
+    const timeEl = panel.querySelector('.time');
+    const progressWrap = panel.querySelector('.progress');
+    const progressBar = panel.querySelector('.bar');
+    const volbar = panel.querySelector('.volbar .vb') || panel.querySelector('.vb');
+    const loopBtn = panel.querySelector('.loop-btn');
+
+    // create audio element
+    const audio = new Audio(src);
+    audio.preload = 'auto';
+    audio.loop = !!loopAttr;
+    audio.crossOrigin = "anonymous";
+
+    // set initial vol
+    audio.volume = 0.5;
+
+    // attach to panel for reference
+    panel._audio = audio;
+
+    // create analyser + connect if possible
+    let analyser = null;
+    let analyserData = null;
+    let sourceNode = null;
+    if (AudioCtx) {
+      analyser = AudioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.8;
+      analyserData = new Uint8Array(analyser.frequencyBinCount);
+    }
+
+    // draw waveform on canvas
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(300, Math.floor(rect.width));
+      canvas.height = Math.max(80, Math.floor(rect.height));
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawWave() {
+      ctx.clearRect(0,0,canvas.width, canvas.height);
+      // background gradient
+      const g = ctx.createLinearGradient(0,0,canvas.width,0);
+      g.addColorStop(0, 'rgba(56,189,248,0.06)');
+      g.addColorStop(0.5, 'rgba(56,189,248,0.10)');
+      g.addColorStop(1, 'rgba(56,189,248,0.03)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,canvas.width, canvas.height);
+
+      // waveform
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(56,189,248,0.95)";
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = "rgba(56,189,248,0.12)";
+      ctx.beginPath();
+
+      if (analyser && sourceNode && AudioCtx.state !== 'suspended') {
+        analyser.getByteTimeDomainData(analyserData);
+        const slice = analyserData;
+        const step = Math.ceil(slice.length / canvas.width);
+        let x = 0;
+        for (let i=0;i<canvas.width;i++){
+          const v = slice[i*step] - 128;
+          const y = canvas.height/2 + (v/128) * (canvas.height/2 - 6);
+          if (i===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          x++;
+        }
+      } else {
+        // idle subtle animated curve
+        const t = Date.now() / 900;
+        for (let i=0;i<canvas.width;i++){
+          const y = canvas.height/2 + Math.sin(i * 0.02 + t) * 8 + Math.cos(i * 0.008 + t*0.8) * 4;
+          if (i===0) ctx.moveTo(i,y); else ctx.lineTo(i,y);
+        }
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      requestAnimationFrame(drawWave);
+    }
+    drawWave();
+
+    // connect audio to analyser when play
+    function ensureAudioConnected() {
+      if (!AudioCtx) return;
+      if (!sourceNode) {
+        try {
+          sourceNode = AudioCtx.createMediaElementSource(audio);
+          sourceNode.connect(analyser);
+          analyser.connect(AudioCtx.destination);
+        } catch (e) {
+          // connecting twice may error — ignore
+        }
+      }
+    }
+
+    // play/pause handler
+    playBtn.addEventListener('click', async function(){
+      // if different audio playing, pause it
+      if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+        if (currentAudio._panel) {
+          currentAudio._panel.querySelector('.playbtn').textContent = '▶';
+        }
+      }
+
+      // resume audio context if suspended (for user gesture requirement)
+      if (AudioCtx && AudioCtx.state === 'suspended') {
+        try { await AudioCtx.resume(); } catch(e){}
+      }
+
+      if (audio.paused) {
+        ensureAudioConnected();
+        audio.play();
+        playBtn.textContent = '▌▌';
+        currentAudio = audio;
+        currentAudio._panel = panel;
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+      }
+    });
+
+    // loop button
+    loopBtn.addEventListener('click', function(){
+      audio.loop = !audio.loop;
+      loopBtn.setAttribute('aria-pressed', String(audio.loop));
+      loopBtn.style.background = audio.loop ? "rgba(56,189,248,0.08)" : "";
+    });
+
+    // progress update
+    audio.addEventListener('timeupdate', function(){
+      timeEl.textContent = fmtTime(audio.currentTime);
+      const pc = audio.duration ? (audio.currentTime / audio.duration * 100) : 0;
+      progressBar.style.width = pc + '%';
+      // ARIA
+      progressWrap.setAttribute('aria-valuenow', Math.floor(pc));
+    });
+
+    audio.addEventListener('play', function(){ playBtn.textContent = '▌▌'; });
+    audio.addEventListener('pause', function(){ playBtn.textContent = '▶'; });
+
+    audio.addEventListener('ended', function(){
+      playBtn.textContent = '▶';
+      // optionally stop analyser connections
+    });
+
+    // progress seek (click)
+    progressWrap.addEventListener('click', function(e){
+      if (!audio.duration) return;
+      const rect = progressWrap.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const pc = x / rect.width;
+      audio.currentTime = Math.max(0, Math.min(audio.duration, pc * audio.duration));
+    });
+
+    // volume control (simple click to set by relative position)
+    const volParent = panel.querySelector('.volbar');
+    volParent.addEventListener('click', function(e){
+      const rect = volParent.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const pc = Math.max(0, Math.min(1, x / rect.width));
+      audio.volume = pc;
+      const vb = volParent.querySelector('.vb');
+      if (vb) vb.style.width = (pc*100)+'%';
+    });
+
+    // preload small metadata (duration) if available
+    audio.addEventListener('loadedmetadata', function(){
+      const dur = audio.duration;
+      const rightTime = panel.querySelector('.track-head div[style]') || panel.querySelector('.track-head > div + div');
+      // the track length in the far right is static here; could update if we want
+    });
+
+    // save references for stopping others
+    panel._audio = audio;
+    panel._analyser = analyser;
+    panel._sourceNode = sourceNode;
+  });
+
+  // stop all function
+  function stopAllExcept(exceptAudio){
+    panels.forEach(p => {
+      const a = p._audio;
+      if (a && a !== exceptAudio) {
+        a.pause();
+      }
+    });
+  }
+
+  // update global currentAudio variable when play any audio via native events
+  document.addEventListener('play', function(e) {
+    const el = e.target;
+    if (el.tagName === 'AUDIO') {
+      stopAllExcept(el);
+      currentAudio = el;
+    }
+  }, true);
+
+  // Tabs filtering
+  tabs.forEach(t => {
+    t.addEventListener('click', function(e){
+      const f = t.dataset.filter;
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      filterGrid(f);
+    });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
+    });
+  });
+
+  function filterGrid(filter) {
+    panels.forEach(panel => {
+      if (filter === 'all' || panel.dataset.type === filter) {
+        panel.style.display = '';
+      } else {
+        panel.style.display = 'none';
+        // pause if hidden
+        if (panel._audio && !panel._audio.paused) panel._audio.pause();
+      }
+    });
+  }
+
+  // initial ARIA setup for progress bars
+  document.querySelectorAll('.progress').forEach(p => {
+    p.setAttribute('role','progressbar');
+    p.setAttribute('aria-valuemin','0');
+    p.setAttribute('aria-valuemax','100');
+    p.setAttribute('aria-valuenow','0');
+  });
+
+  // ensure user gesture requirement for WebAudio: resume on first click
+  document.addEventListener('click', function once() {
+    if (AudioCtx && AudioCtx.state === 'suspended') {
+      AudioCtx.resume().catch(()=>{});
+    }
+    document.removeEventListener('click', once);
+  });
+
+  // small safety: if audio files missing, show fallback console message
+  panels.forEach(p => {
+    const a = p._audio;
+    a.addEventListener('error', function(){ console.warn('Audio not found or blocked:', p.dataset.src); });
+  });
+
+})();
+</script>
+</body>
+</html>

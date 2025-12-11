@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Forgot Password - BIG DREAM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="brand">
+      <div class="logo">BIG DREAM</div>
+      <div class="tag">Dream Big • Act Now</div>
+    </div>
+
+    <nav class="nav" role="navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false">☰</button>
+  </header>
+
+  <main class="container">
+    <div class="card reveal" style="max-width:640px;margin:40px auto;padding:24px;">
+      <h2 class="h-accent">Forgot Password</h2>
+      <p class="lead">Enter your account email. We'll send a secure reset link if the address exists (demo behavior).</p>
+
+      <form id="forgotForm">
+        <label style="display:block;margin-top:12px;">Email</label>
+        <input id="email" type="email" placeholder="your@example.com" required>
+        <div style="margin-top:12px;">
+          <button class="primary" type="submit">Send Reset Link</button>
+        </div>
+        <div id="msg" style="margin-top:10px;color:var(--muted);font-size:14px;"></div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="icons">
+      <a href="#"><img src="insta logo.webp" alt="Instagram"></a>
+      <a href="#"><img src="link logo.avif" alt="LinkedIn"></a>
+      <a href="#"><img src="you logo.jpg" alt="YouTube"></a>
+      <a href="https://github.com/ram399613/bigdreamrr" target="_blank"><img src="git logo.webp" alt="GitHub"></a>
+    </div>
+    <p>BIG DREAM © 2025 | Dream Big, Act Now.</p>
+  </footer>
+
+<script>
+document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const msg = document.getElementById('msg');
+  msg.style.color = 'var(--muted)';
+  msg.textContent = '';
+  // Demo: neutral message to avoid leaking account existence
+  setTimeout(()=> {
+    msg.style.color = '#9ce5ff';
+    msg.textContent = 'If that email exists, a reset link has been sent (demo). Connect backend to enable real emails.';
+  }, 600);
+});
+</script>
+
+<script src="site.js"></script>
+</body>
+</html>

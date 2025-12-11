@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - BIG DREAM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="brand">
+      <div class="logo">BIG DREAM</div>
+      <div class="tag">Dream Big • Act Now</div>
+    </div>
+
+    <nav class="nav" role="navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false">☰</button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="container">
+    <div class="card reveal" style="max-width:480px;margin:40px auto;padding:26px;">
+      
+      <h2 class="h-accent">Account Login</h2>
+      <p class="lead">Welcome back! Log in to continue your BIG DREAM journey.</p>
+
+      <form id="loginForm">
+
+        <label style="display:block;margin-top:12px;">Email</label>
+        <input type="email" id="email" placeholder="your@example.com" required>
+
+        <label style="display:block;margin-top:12px;">Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+
+        <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;">
+          <label style="color:var(--muted);font-size:14px;">
+            <input type="checkbox" id="remember" style="margin-right:4px;"> Remember me
+          </label>
+          <a href="forgot.html" style="color:var(--accent);font-size:14px;text-decoration:none;">Forgot?</a>
+        </div>
+
+        <button type="submit" class="primary" style="width:100%;margin-top:16px;">Login</button>
+
+      </form>
+
+      <p style="text-align:center;margin-top:14px;color:var(--muted);font-size:14px;">
+        Don’t have an account? <a href="register.html" style="color:var(--accent);text-decoration:none;">Register</a>
+      </p>
+
+      <div id="msg" style="color:var(--muted);font-size:14px;margin-top:10px;text-align:center;"></div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="icons">
+      <a href="#"><img src="insta logo.webp" alt="Instagram"></a>
+      <a href="#"><img src="link logo.avif" alt="LinkedIn"></a>
+      <a href="#"><img src="you logo.jpg" alt="YouTube"></a>
+      <a href="https://github.com/ram399613/bigdreamrr" target="_blank"><img src="git logo.webp" alt="GitHub"></a>
+    </div>
+    <p>BIG DREAM © 2025 | Dream Big, Act Now.</p>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const msg = document.getElementById('msg');
+
+      // DEMO LOGIN SYSTEM (replace with backend later)
+      if(email === "" || pass === ""){
+        msg.textContent = "Please enter all fields.";
+        msg.style.color = "var(--danger)";
+        return;
+      }
+
+      msg.style.color = "#9ce5ff";
+      msg.textContent = "Logging in… (Demo only)";
+
+      setTimeout(()=>{
+        msg.textContent = "Login successful! Redirecting…";
+        // redirect to home or dashboard
+        setTimeout(()=> window.location = "index.html", 1200);
+      }, 800);
+    });
+  </script>
+
+  <script src="site.js"></script>
+</body>
+</html>

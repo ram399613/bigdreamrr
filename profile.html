@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile - BIG DREAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BIG DREAM</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="music.html">Music</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a class="active" href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<div class="content">
+
+    <!-- Banner Section -->
+    <div class="profile-banner"></div>
+
+    <!-- Profile Box -->
+    <div class="profile-box">
+
+        <!-- Avatar -->
+        <div class="profile-avatar">RR</div>
+
+
+
+        <!-- Name + Bio -->
+        <h2 class="profile-name">Your Name</h2>
+        <p class="profile-bio">A short bio about you. Update your information below.</p>
+
+        <!-- Form -->
+        <form class="profile-form">
+
+            <label>Full Name</label>
+            <input type="text" placeholder="Your name">
+
+            <label>Short Bio</label>
+            <textarea placeholder="Write something about you..."></textarea>
+
+            <div class="btn-row">
+                <button class="btn-save">Save</button>
+                <button class="btn-cancel" type="button">Cancel</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile - BIG DREAM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- GLOBAL LOADER -->
+  <div id="siteLoader"><div class="loader-text">BIG DREAM</div></div>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="brand">
+      <div class="logo">BIG DREAM</div>
+      <div class="tag">Dream Big • Act Now</div>
+    </div>
+
+    <nav class="nav" role="navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-expanded="false">☰</button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="container">
+    <div id="dashWrap" style="max-width:1100px;margin:24px auto;">
+
+      <div class="card reveal" id="profileCard" style="padding:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h2 class="h-accent" id="userName">Welcome</h2>
+            <p id="userEmail" class="lead" style="margin:6px 0 0 0;"></p>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;">
+            <a href="goals.html"><button class="primary">Create Goal</button></a>
+            <button id="logoutBtn"
+              style="padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+              background:transparent;color:var(--muted);cursor:pointer;">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid cols-3" style="margin-top:18px;">
+        <div class="card reveal">
+          <h3 class="h-accent">Saved Plans</h3>
+          <p id="plansCount" class="lead">0</p>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="h-accent">Motivation</h3>
+          <p class="lead">Use the chatbot for personalized plans and motivation.</p>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="h-accent">Tips</h3>
+          <p class="lead">Use Goal Planner to break your dreams into daily actions.</p>
+        </div>
+      </div>
+
+      <!-- Saved Plans List -->
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 class="h-accent">Your Saved Plans</h3>
+        <div id="planList" style="margin-top:12px;"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- UPDATED FOOTER YOU PROVIDED -->
+  <footer class="footer">
+    <div class="footer-content">
+
+      <div class="social-circle">
+        <a href="https://www.instagram.com/bigdream_entertainment/?hl=en"
+           title="Instagram" aria-label="Instagram" target="_blank">
+          <img src="insta logo.webp" alt="Instagram">
+        </a>
+
+        <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A106081971&keywords=dream%20big%20digital&origin=RICH_QUERY_SUGGESTION&position=7&sid=x9~"
+           title="LinkedIn" aria-label="LinkedIn" target="_blank">
+          <img src="link logo.avif" alt="LinkedIn">
+        </a>
+
+        <a href="https://www.youtube.com/@bigdream2893"
+           title="YouTube" aria-label="YouTube" target="_blank">
+          <img src="you logo.jpg" alt="YouTube">
+        </a>
+
+        <a href="https://github.com/ram399613/bigdreamrr"
+           title="GitHub" aria-label="GitHub" target="_blank">
+          <img src="git logo.webp" alt="GitHub">
+        </a>
+      </div>
+
+      <p class="footer-text">BIG DREAM © 2025 | Dream Big, Act Now.</p>
+
+      <div class="footer-links">
+        <a href="profile.html">Your Profile</a> •
+        <a href="aims.html">Aims</a> •
+        <a href="contact.html">Contact</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Guard page (block if not logged in)
+    const me = window.demoRequireAuth && window.demoRequireAuth("login.html");
+    if (me) {
+      document.getElementById("userName").textContent = me.name;
+      document.getElementById("userEmail").textContent = me.email;
+    }
+
+    function loadPlans() {
+      const list = document.getElementById("planList");
+      const all = JSON.parse(localStorage.getItem("bd_plans") || "[]");
+
+      const plans = all.filter(
+        (p) => p.name.toLowerCase() === me.name.toLowerCase()
+      );
+
+      document.getElementById("plansCount").textContent = plans.length;
+
+      if (!plans.length) {
+        list.innerHTML =
+          '<p style="color:var(--muted)">No plans saved yet. Create one in Goal Planner.</p>';
+        return;
+      }
+
+      list.innerHTML = "";
+      plans
+        .slice()
+        .reverse()
+        .forEach((p, i) => {
+          const div = document.createElement("div");
+          div.className = "card reveal";
+          div.style.margin = "10px 0";
+
+          div.innerHTML = `
+            <strong style="color:var(--accent)">${p.name} — ${p.timeline}</strong>
+            <p style="margin:10px 0">${p.dream}</p>
+            <p style="margin:0;color:var(--muted)"><em>First step:</em> ${p.step}</p>
+          `;
+
+          list.appendChild(div);
+        });
+    }
+
+    loadPlans();
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      window.demoLogout();
+    });
+  </script>
+
+  <script src="site.js"></script>
+
+</body>
+</html>
+
+</body>
+</html>

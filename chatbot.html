@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIG DREAM - Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Chat Layout Fix */
+    .chat-wrapper {
+      max-width: 820px;
+      margin: 130px auto;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+    }
+    
+
+    .chat-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    #messages {
+      height: 380px;
+      overflow-y: auto;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .msg {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+    }
+
+    .bubble {
+      padding: 10px 16px;
+      border-radius: 14px;
+      max-width: 75%;
+      background: rgba(56, 189, 248, 0.1);
+      color: #e6faff;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .msg.user .bubble {
+      background: #38bdf8;
+      color: #001219;
+      margin-left: auto;
+    }
+
+    .quick-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      background: transparent;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 8px 14px;
+      border-radius: 12px;
+      color: #38bdf8;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #chatInput {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+    }
+
+    #sendBtn {
+      background: #38bdf8;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    #micBtn {
+      background: rgba(56, 189, 248, 0.12);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 20px;
+    }
+
+    #typing {
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 6px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo">BIG DREAM</div>
+      <div class="tag">Dream Big • Act Now</div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="music.html">Music</a>
+      <a href="chatbot.html" class="active">Chatbot</a>
+      <a href="goals.html">Goal Planner</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+
+    <button class="menu-btn">☰</button>
+  </header>
+
+  <div class="chat-wrapper">
+    <div class="chat-title">BIG DREAM AI Assistant</div>
+
+    <!-- CHAT AREA -->
+    <div id="messages"></div>
+    <div id="typing">Assistant is typing...</div>
+
+    <!-- QUICK BUTTONS -->
+    <div class="quick-row">
+      <button class="quick-btn" data-q="Give me motivation">Motivation</button>
+      <button class="quick-btn" data-q="Help me plan my day">Day Plan</button>
+      <button class="quick-btn" data-q="Study plan for exams">Study Plan</button>
+      <button class="quick-btn" data-q="Health tips">Health Tips</button>
+      <button id="clearChat" class="quick-btn">Clear Chat</button>
+      <button id="saveChat" class="quick-btn">Save Chat</button>
+
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="input-row">
+      <button id="micBtn">🎤</button>
+      <input id="chatInput" placeholder="Type your message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+  <div id="autoSuggest" class="suggest-container"></div>
+
+
+  <script src="chat-ai.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>
